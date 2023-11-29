@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "zkOKNTb+RpiWZL94kZJMNGsQlO6U044IjkouaCjusrqoG0ANZdkIDUh5CL4E9Hi4l52dSgGzRle+KKgfDEzqKw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\adolfo.sakata\\UnityTraining\\HangMan\\HangMan\\StringBuffer\\StringBuffer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\adolfo.sakata\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
+    "C:\\Users\\adolfo.sakata\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\adolfo.sakata\\.nuget\\packages\\system.security.cryptography.protecteddata\\8.0.0\\system.security.cryptography.protecteddata.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
