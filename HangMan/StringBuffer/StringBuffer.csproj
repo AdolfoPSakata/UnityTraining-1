@@ -5,6 +5,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Screens\ScreensASCII - Copy (2).txt" />
+    <None Remove="Screens\ScreensASCII - Copy (3).txt" />
+    <None Remove="Screens\ScreensASCII - Copy (4).txt" />
+    <None Remove="Screens\ScreensASCII - Copy (5).txt" />
+    <None Remove="Screens\ScreensASCII - Copy.txt" />
+    <None Remove="Screens\ScreensASCII.txt" />
+    <None Remove="WordDatabase\WordDatabaseFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Screens\ScreensASCII - Copy (2).txt" />
+    <EmbeddedResource Include="Screens\ScreensASCII - Copy (3).txt" />
+    <EmbeddedResource Include="Screens\ScreensASCII - Copy (4).txt" />
+    <EmbeddedResource Include="Screens\ScreensASCII - Copy (5).txt" />
+    <EmbeddedResource Include="Screens\ScreensASCII - Copy.txt" />
+    <EmbeddedResource Include="Screens\ScreensASCII.txt" />
+    <EmbeddedResource Include="WordDatabase\WordDatabaseFile.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 

@@ -3,23 +3,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace UnityTraining_1
+namespace StringBuffer
 {
-    class WordManager
+    public class FileReader
     {
-        private List<string> cachedWordList = new List<string>();
-        const int FAIL_SAFE = 100;
-
-        public WordManager(string path)
+        private static FileReader fileReaderSingleton;
+        public static FileReader Instance
         {
-            InitManager(path);
+            get
+            {
+                if (fileReaderSingleton == null)
+                {
+                    fileReaderSingleton = new FileReader();
+                }
+                return fileReaderSingleton;
+            }
         }
 
-        private List<string> ReadWordDatabase(string path)
+        public List<string> ReadWordDatabase(string path)
         {
             List<string> wordList = new List<string>();
+
             try
             {
+                const int FAIL_SAFE = 100;
                 Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
                 StreamReader streamReader = new StreamReader(stream);
                 string singleWord = null;
@@ -32,6 +39,7 @@ namespace UnityTraining_1
                         break;
 
                     wordList.Add(singleWord);
+                    i = 0;
                     i++;
                 }
                 streamReader.Close();
@@ -43,16 +51,11 @@ namespace UnityTraining_1
             return wordList;
         }
 
-        private void InitManager(string path)
-        {
-            cachedWordList = ReadWordDatabase(path);
-        }
-
-        public string GetRandomWord()
+        public string GetRandomLine(List<string> wordList)
         {
             Random ramdon = new Random();
-            int index = ramdon.Next(0, cachedWordList.Count);
-            string randomWord = cachedWordList[index];
+            int index = ramdon.Next(0, wordList.Count);
+            string randomWord = wordList[index];
             return randomWord;
         }
     }

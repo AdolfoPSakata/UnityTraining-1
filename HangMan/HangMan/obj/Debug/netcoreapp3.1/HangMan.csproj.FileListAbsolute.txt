@@ -3,7 +3,6 @@ C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreap
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.AssemblyInfoInputs.cache
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.AssemblyInfo.cs
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.csproj.CoreCompileInputs.cache
-C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\bin\Debug\netcoreapp3.1\WordDatabase\WordDatabaseFile.txt
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\bin\Debug\netcoreapp3.1\HangMan.exe
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\bin\Debug\netcoreapp3.1\HangMan.dll.config
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\bin\Debug\netcoreapp3.1\HangMan.deps.json
@@ -19,3 +18,5 @@ C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreap
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.dll
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.pdb
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.genruntimeconfig.cache
+C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\bin\Debug\netcoreapp3.1\StringBuffer.dll.config
+C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\bin\Debug\netcoreapp3.1\WordDatabase\WordDatabaseFile.txt

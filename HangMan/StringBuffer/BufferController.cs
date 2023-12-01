@@ -10,8 +10,6 @@ namespace StringBuffer
             Line,
             Collum,
             Block,
-            Single,
-            Missing,
         }
 
         internal Tuple<int, int> ModeSelection(Mode mode, int i, int line, int collum)
@@ -58,20 +56,23 @@ namespace StringBuffer
             return finalString;
         }
 
-        internal void ModifyBuffer(Mode mode, string[,] buffer, string toWrite, int line, int collum, int repeat)
+        public string[,] ModifyBuffer(BufferChange change)
         {
             Tuple<int, int> tuple = new Tuple<int, int>(0, 0);
-            for (int j = 0; j < repeat; j++)
+            int j = 0;
+            do
             {
-                for (int i = 0; i < toWrite.Length; i++)
+                for (int i = 0; i < change.toWrite.Length; i++)
                 {
-                    tuple = ModeSelection(mode, i, line, collum);
-                    buffer[tuple.Item1 + j, tuple.Item2 + j] = toWrite[i + j].ToString();
+                    tuple = ModeSelection(change.mode, i, change.line, change.collum);
+                    change.buffer[tuple.Item1 + j, tuple.Item2] = change.toWrite[i].ToString();
                 }
-            }
-        } 
+                j++;
+            } while (j <= change.repeat);
+            return change.buffer;
+        }
 
-        internal string[,] SetBuffer()
+        public string[,] SetBuffer()
         {
             int maxX = int.Parse(ConfigurationManager.AppSettings["MaxChar_X"]);
             int maxY = int.Parse(ConfigurationManager.AppSettings["MaxChar_Y"]);
@@ -82,12 +83,32 @@ namespace StringBuffer
                 int lastIndex = 0;
                 for (int y = 0; y < maxY; y++)
                 {
-                    buffer[x, y] = " ";
+                    buffer[x, y] = "+";
                     lastIndex = y;
                 }
                 buffer[x, lastIndex] = "\n";
             }
             return buffer;
+        }
+    }
+
+    internal class BufferChange
+    {
+        public BufferController.Mode mode;
+        public string[,] buffer;
+        public string toWrite;
+        public int line;
+        public int collum;
+        public int repeat;
+
+        public BufferChange(BufferController.Mode mode, string[,] buffer, string toWrite, int line, int collum, int repeat)
+        {
+            this.mode = mode;
+            this.buffer = buffer;
+            this.toWrite = toWrite;
+            this.line = line;
+            this.collum = collum;
+            this.repeat = repeat;
         }
     }
 }

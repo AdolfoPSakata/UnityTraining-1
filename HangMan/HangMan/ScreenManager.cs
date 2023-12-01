@@ -1,40 +1,21 @@
-﻿using System;
-//using System.Configuration;
+﻿//using System.Configuration;
 using StringBuffer;
+using System;
 
-namespace UnityTraining_1
+namespace HangMan
 {
-    class ScreenManager
-    { 
-    //    int maxX = int.Parse(ConfigurationManager.AppSettings["MaxChar_X"]);
-    //    int maxY = int.Parse(ConfigurationManager.AppSettings["MaxChar_Y"]);
-        string cachedName = null;
+    class ScreenManager : IScreenManager
+    {
         string[,] cachedBuffer = { };
         Screens screens = new Screens();
-        //Screens screens = new Screens.Screens();
-        //public ScreenManager()
-        //{
 
-        //}
-
-        
-
-       public void ShowScreen()
+        public void ShowScreen(string data)
         {
-            cachedBuffer = screens.test();
-            foreach (var item in cachedBuffer)
+            Console.Clear();
+            foreach (var item in data)
             {
-                Console.Clear();
                 Console.Write(item);
             }
         }
-
-        public string ShowName()
-        {
-            string playersName = Console.ReadLine();
-            return playersName;
-        }
-
-       
     }
 }

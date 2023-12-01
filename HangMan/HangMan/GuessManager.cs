@@ -1,36 +1,62 @@
 ﻿using System.Text.RegularExpressions;
-//using UnityTraining_1.Screens;
+using System.Configuration;
+using StringBuffer;
+using System.Collections.Generic;
 
-namespace UnityTraining_1
+namespace HangMan 
 {
     class GuessManager
     {
-        string wordToGuess = null;
-        string usedLetters = null;
-        public void VerifyGuess(char guessLetter)
+        public GuessManager()
         {
-           // BufferController screenManager = new BufferController();
+            Init();
+        }
+        
+        public string wordToGuess = "";
+        public string usedLetters = "";
+        readonly string path = ConfigurationManager.AppSettings["WordDatabase"];
+
+        public void Init()
+        {
+            wordToGuess = ReadWordFromDatabase();
+        }
+        
+        public string ReadWordFromDatabase()
+        {
+          var wordList = FileReader.Instance.ReadWordDatabase(path);
+           return FileReader.Instance.GetRandomLine(wordList);
+        }
+
+        public void VerifyGuess(string guessLetter)
+        {
             foreach (char letter in usedLetters)
             {
                 //chnge to single chrs
-                if (Regex.IsMatch(guessLetter.ToString(), letter.ToString()))
+                if (Regex.IsMatch(guessLetter.ToString().ToUpper(), letter.ToString().ToUpper()))
                 {
-                    // retry
+                   
+                    return;
                 }
             }
 
             for (int i = 0; i < wordToGuess.Length; i++)
             {
-                if (wordToGuess[i] == guessLetter)
+                if (wordToGuess[i].ToString().ToUpper() == guessLetter.ToUpper())
                 {
+                    
+
                     //send to screen 
                     //add points
 
                 }
                 else
-                { }
-                    //loose prt
+                { 
+
+                    //loose parts
+                }
             }
+            //end condition
+            usedLetters += guessLetter;
         }
     }
 }

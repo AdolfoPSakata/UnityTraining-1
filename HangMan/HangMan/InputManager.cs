@@ -1,16 +1,18 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace UnityTraining_1
+namespace HangMan
 {
     class InputManager
     {
         const string pattern = "^[a-zA-Z]{1}.*";
-        public char ReadInput(string input)
+        public string ReadInput(string input)
         {
             if (ValidateInput(input))
-                return input[0];
+            { 
+                return input[0].ToString();
+            }
             else
-                return ' ';
+                return null;
         }
 
         private bool ValidateInput(string input)
