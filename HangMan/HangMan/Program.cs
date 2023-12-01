@@ -19,13 +19,12 @@ namespace HangMan
 
 
             //string name = Console.ReadLine();
-            //screenManager.ShowScreen();
             isPlaying = true;
+            screenManager.ShowScreen("tetetetet");
 
             while (isPlaying)
             {
                 string playerInput = inputManager.ReadInput(Console.ReadLine());
-                screenManager.ShowScreen("Matheus Boladão");
                 Console.WriteLine(guessManager.usedLetters);
                 Console.WriteLine(guessManager.wordToGuess);
                 if (!string.IsNullOrEmpty(playerInput))

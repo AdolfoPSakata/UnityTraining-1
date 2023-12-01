@@ -23,7 +23,7 @@ namespace HangMan
         
         public string ReadWordFromDatabase()
         {
-          var wordList = FileReader.Instance.ReadWordDatabase(path);
+          var wordList = FileReader.Instance.ReadExternalFile(path);
            return FileReader.Instance.GetRandomLine(wordList);
         }
 
