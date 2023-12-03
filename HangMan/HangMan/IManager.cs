@@ -4,8 +4,8 @@ using System.Text;
 
 namespace HangMan
 {
-    interface IScreenManager
+    interface IManager
     {
-        void ShowScreen(string data);
+        void Init();
     }
 }

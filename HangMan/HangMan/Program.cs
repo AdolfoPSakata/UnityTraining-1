@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 
 namespace HangMan
 {
@@ -9,35 +8,54 @@ namespace HangMan
 
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             bool isPlaying = false;
-            string databasePath = ConfigurationManager.AppSettings["WordDatabase"];
-
-            //WordReader wordManager = new WordReader(databasePath);
-            InputManager inputManager = new InputManager();
             IScreenManager screenManager = new ScreenManager();
+            InputManager inputManager = new InputManager();
             GuessManager guessManager = new GuessManager();
+            Console.WriteLine("-------------Enter your Name---------------");
+
+            //TODO: name to something more fool proof
+
+            string playerName = Console.ReadLine();
+
+            //merge this shit
+            screenManager.RequestNameChange(playerName);
+            screenManager.SendBufferChanges("Name", playerName);
 
 
-            //string name = Console.ReadLine();
+            string rightLetters = guessManager.GetRightLetters();
+            screenManager.SendBufferChanges("GuessWord", rightLetters);
+            //---------------
+            
+            //create game
             isPlaying = true;
-            screenManager.ShowScreen("tetetetet");
+            //TODO: Fix tahat
+            screenManager.ShowScreen(" ");
 
             while (isPlaying)
             {
                 string playerInput = inputManager.ReadInput(Console.ReadLine());
-                Console.WriteLine(guessManager.usedLetters);
-                Console.WriteLine(guessManager.wordToGuess);
+
                 if (!string.IsNullOrEmpty(playerInput))
                 {
-                    guessManager.VerifyGuess(playerInput);
+                    rightLetters = guessManager.VerifyGuess(playerInput);
+                    string usedLetters = guessManager.GetUsedLetters();
+                    screenManager.SendBufferChanges("GuessWord", rightLetters);
+                    screenManager.SendBufferChanges("UsedLetters", usedLetters);
 
-
+                    if (rightLetters == "WIN" || rightLetters == "DEAD")
+                    {
+                        screenManager.SendBufferChanges("Message", rightLetters);
+                    }
+                    screenManager.ShowScreen(" ");
                 }
-
-
-
             }
-            Console.WriteLine("-------------END---------------");
+            screenManager.ShowScreen(" ");
+            Console.WriteLine("-------------END---------------" + rightLetters);
+            Console.ReadLine();
         }
+
+
     }
 }

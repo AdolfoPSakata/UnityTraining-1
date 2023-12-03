@@ -10,7 +10,6 @@ namespace StringBuffer
             Collum,
             Block,
         }
-
         internal Tuple<int, int> ModeSelection(Mode mode, int i, int line, int collum)
         {
             int indexX, indexY = 0;
@@ -52,23 +51,22 @@ namespace StringBuffer
             {
                 finalString += singleChar;
             }
-            
+
             return finalString;
         }
 
         public string[,] ModifyBuffer(BufferChange change, string[,] buffer)
         {
+            //Change to a tool script
             Tuple<int, int> tuple = new Tuple<int, int>(0, 0);
             int j = 0;
             int index = 0;
             do
             {
-                for (int i = 0; i <= change.toWrite.Length; i++)
+                for (int i = 0; i <= change.toWrite.Length - 1; i++)
                 {
                     if (change.toWrite[i].ToString() == "\n")
                     {
-                        j++;
-                        index++;
                         break;
                     }
                     else if (change.toWrite[i].ToString() == "\r")
@@ -81,10 +79,14 @@ namespace StringBuffer
                         if (string.IsNullOrWhiteSpace(buffer[tuple.Item1 + j, tuple.Item2]))
                             buffer[tuple.Item1 + j, tuple.Item2] = change.toWrite[index].ToString();
                         index++;
-                       
                     }
+
+                    if (change.toWrite.Length <= index)
+                        return buffer;
                 }
-            } while (change.toWrite.Length > index);
+                j++;
+                index++;
+            } while (change.toWrite.Length - 1 > index);
             return buffer;
         }
 
