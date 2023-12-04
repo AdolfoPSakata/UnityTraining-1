@@ -69,7 +69,7 @@ namespace StringBuffer
             return text;
         }
 
-        public string GetRandomLine(List<string> stringList)
+        public string GetRamdonLine(List<string> stringList)
         {
             Random ramdon = new Random();
             int index = ramdon.Next(0, stringList.Count);

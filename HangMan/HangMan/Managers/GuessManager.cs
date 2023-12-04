@@ -11,7 +11,7 @@ namespace HangMan
         {
             Init();
         }
-
+        IScreenManager screenManager = new ScreenManager();
         private string wordToGuess = "";
         private string usedLetters = "";
         private string partialWord;
@@ -22,7 +22,6 @@ namespace HangMan
         const int MAX_QUALIFIER_TRIES = 3;
         private int wrongQualifier = 0;
         readonly string path = ConfigurationManager.AppSettings["WordDatabase"];
-        private Player player = new Player("name", 0, 0, MAX_HEALTH);
         public void Init()
         {
             wordToGuess = ReadWordFromDatabase();
@@ -34,7 +33,7 @@ namespace HangMan
         public string ReadWordFromDatabase()
         {
             var wordList = FileReader.Instance.ReadExternalFile(path);
-            return FileReader.Instance.GetRandomLine(wordList);
+            return FileReader.Instance.GetRamdonLine(wordList);
         }
 
         public string VerifyGuess(string guessLetter)
@@ -63,9 +62,6 @@ namespace HangMan
                 {
                     wrongQualifier = 0;
                     letterIndexes.Add(i);
-
-
-                
                 }
             }
             wrongQualifier = 0;
@@ -94,13 +90,13 @@ namespace HangMan
         public string WrongGuess()
         {
             remainingLives--;
+            screenManager.SendBufferChanges(screenManager.GetNextPoint());
             if (remainingLives <= 0)
                 return "DEAD";
 
             return partialWord;
         }
 
-        // a bit confusing
         public string RightGuess(string guessLetter, List<int> letterIndexes)
         {
             char[] wordArray = partialWord.ToCharArray();

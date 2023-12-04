@@ -1,51 +1,39 @@
-﻿using StringBuffer;
-using System;
+﻿using System;
+using StringBuffer;
 
 namespace HangMan
 {
+    //TODO: move to string buffer
     class ScreenManager : IScreenManager
     {
         Screens screens = new Screens();
-        public ScreenManager()
-        {
-            screens.CreateScreenDictionary();
-        }
+        //change maybe
 
-        public void ShowScreen(string data)
+        public void ShowScreen(ScreensTypes.ScreenType key)
         {
             //TODO: switch or state machine
-            string[,] currentScreen = screens.ScreenConstructor();
+            string[,] currentScreen = screens.ScreenConstructor(key);
             Console.Clear();
             foreach (var character in currentScreen)
             {
-                //TODO: make a color controler, or tool
-                if (character == " ")
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                else if (character == "&")
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.BackgroundColor = ConsoleColor.DarkBlue;
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.BackgroundColor = ConsoleColor.Red;
-                }
-
+                //TODO: COLOR MANAGER Integration
                 Console.Write(character);
             }
         }
-        //TODO: better way
-        public void SendBufferChanges(string key, string text)
+        //TODO: better way maybe delegate
+        public void SendBufferChanges(Screens.ScreenNames key)
         {
-            screens.UpdateDictionary(key, text);
-            //split this
             screens.AddToRenderQueue(key);
         }
 
-        public void RequestNameChange(string text)
+        public void ChangeDictionaryText(Screens.ScreenNames key, string text)
         {
-            screens.UpdateName("Name", text);
+            screens.UpdateDictionary(key, text);
+        }
+
+        public Screens.ScreenNames GetNextPoint()
+        {
+            return screens.GetNextPointScreen();
         }
     }
 }
