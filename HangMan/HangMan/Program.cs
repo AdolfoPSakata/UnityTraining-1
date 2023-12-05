@@ -6,8 +6,6 @@ namespace HangMan
 {
     class Program
     {
-        //public delegate string ProcessString(string input);
-
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;

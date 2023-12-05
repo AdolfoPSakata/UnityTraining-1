@@ -9,7 +9,6 @@ namespace HangMan
     {
         IScreenManager screenManager = new ScreenManager();
 
-        readonly InputOption key_Any;
         readonly InputOption key_P;
         readonly InputOption key_X;
         readonly InputOption key_R;
@@ -23,38 +22,38 @@ namespace HangMan
         readonly InputOption key_6;
         readonly InputOption key_7;
 
-        public Dictionary<string, InputOption> introScreen;
-        public Dictionary<string, InputOption> menuScreen;
-        public Dictionary<string, InputOption> winScreen;
-        public Dictionary<string, InputOption> loseScreen;
-        public Dictionary<string, InputOption> gameScreen;
-        public Dictionary<string, InputOption> pactScreen;
-        public ScreensTypes.ScreenType currentScreen;
-        public Dictionary<ScreensTypes.ScreenType, Dictionary<string, InputOption>> currentScreenDict;
+        private Dictionary<string, InputOption> introScreen;
+        private Dictionary<string, InputOption> menuScreen;
+        private Dictionary<string, InputOption> winScreen;
+        private Dictionary<string, InputOption> loseScreen;
+        private Dictionary<string, InputOption> gameScreen;
+        private Dictionary<string, InputOption> pactScreen;
+
+        public ScreensTypes.ScreenType currentScreen { get; private set; }
+        private Dictionary<ScreensTypes.ScreenType, Dictionary<string, InputOption>> currentScreenDict;
         GuessManager guessManager = new GuessManager();
         InputManager inputManager = new InputManager();
+       
         string rightLetters;
         string usedLetters;
         string playerInput;
         Action updateGame;
         public ScreenInput()
         {
-
             updateGame = new Action(UpdateGame);
 
-            key_Any = new InputOption(null, StartGame);
             key_P = new InputOption("P", StartGame);
             key_X = new InputOption("X", ExitGame);
             key_R = new InputOption("R", ReturnToMenu);
             key_S = new InputOption("S", Replay);
 
-            key_1 = new InputOption("1", SelectDatabase);
-            key_2 = new InputOption("2", SelectDatabase);
-            key_3 = new InputOption("3", SelectDatabase);
-            key_4 = new InputOption("4", SelectDatabase);
-            key_5 = new InputOption("5", SelectDatabase);
-            key_6 = new InputOption("6", SelectDatabase);
-            key_7 = new InputOption("7", SelectDatabase);
+            key_1 = new InputOption("1", SendDatabase);
+            key_2 = new InputOption("2", SendDatabase);
+            key_3 = new InputOption("3", SendDatabase);
+            key_4 = new InputOption("4", SendDatabase);
+            key_5 = new InputOption("5", SendDatabase);
+            key_6 = new InputOption("6", SendDatabase);
+            key_7 = new InputOption("7", SendDatabase);
 
             Init();
         }
@@ -123,32 +122,38 @@ namespace HangMan
         }
         private void Replay()
         {
+            screenManager.ResetPoints();
             screenManager.ShowScreen(ScreensTypes.ScreenType.Intro);
             currentScreen = ScreensTypes.ScreenType.Intro;
         }
 
         private void ReturnToMenu()
         {
+            screenManager.ResetPoints();
             screenManager.ShowScreen(ScreensTypes.ScreenType.Menu);
             currentScreen = ScreensTypes.ScreenType.Menu;
         }
 
-        public void StartGame()
+        private void StartGame()
         {
+            screenManager.ResetPoints();
             screenManager.ShowScreen(ScreensTypes.ScreenType.Intro);
             currentScreen = ScreensTypes.ScreenType.Intro;
         }
-        public void ExitGame()
+        private void ExitGame()
         {
             Environment.Exit(0);
         }
 
-        public void SelectDatabase()
+        private void SendDatabase()
         {
+            screenManager.ResetPoints();
+            screenManager.ResetGameScreen();
+            screenManager.ChangeDictionaryText(Screens.ScreenNames.UsedLetters, "");
             screenManager.ShowScreen(ScreensTypes.ScreenType.Pact);
-
+            guessManager.SelectDatabase(playerInput);
             string playerName = Console.ReadLine();
-            screenManager.ChangeDictionaryText(Screens.ScreenNames.Name, playerName);
+            screenManager.ChangeDictionaryText(Screens.ScreenNames.Name, playerName.ToUpper());
             screenManager.SendBufferChanges(Screens.ScreenNames.Name);
 
             rightLetters = guessManager.GetRightLetters();
@@ -157,7 +162,7 @@ namespace HangMan
             currentScreen = ScreensTypes.ScreenType.Game;
         }
 
-        public void UpdateGame()
+        private void UpdateGame()
         {
             playerInput = inputManager.ReadInput(playerInput);
 
@@ -165,12 +170,13 @@ namespace HangMan
             {
                 rightLetters = guessManager.VerifyGuess(playerInput);
                 usedLetters = guessManager.GetUsedLetters();
-                screenManager.ChangeDictionaryText(Screens.ScreenNames.GuessWord, rightLetters);
-                screenManager.ChangeDictionaryText(Screens.ScreenNames.UsedLetters, usedLetters);
-                screenManager.ShowScreen(ScreensTypes.ScreenType.Game);
+                screenManager.ChangeDictionaryText(StringBuffer.Screens.ScreenNames.GuessWord, rightLetters);
+                screenManager.ChangeDictionaryText(StringBuffer.Screens.ScreenNames.UsedLetters, usedLetters);
 
                 if (rightLetters == "WIN")
                 {
+                    screenManager.ChangeDictionaryText(StringBuffer.Screens.ScreenNames.GuessWord, guessManager.wordToGuess.ToUpper());
+                    screenManager.ShowScreen(ScreensTypes.ScreenType.Game);
                     Thread.Sleep(3000);
                     screenManager.ShowScreen(ScreensTypes.ScreenType.Win);
                     currentScreen = ScreensTypes.ScreenType.Win;
@@ -178,6 +184,8 @@ namespace HangMan
                 }
                 else if (rightLetters == "DEAD")
                 {
+                    screenManager.ChangeDictionaryText(StringBuffer.Screens.ScreenNames.GuessWord, guessManager.wordToGuess.ToUpper());
+                    screenManager.ShowScreen(ScreensTypes.ScreenType.Game);
                     Thread.Sleep(3000);
                     screenManager.ShowScreen(ScreensTypes.ScreenType.Lose);
                     currentScreen = ScreensTypes.ScreenType.Lose;

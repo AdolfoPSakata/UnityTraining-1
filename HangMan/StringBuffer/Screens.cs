@@ -10,7 +10,7 @@ namespace StringBuffer
         {
             CreateScreenDictionary();
         }
-        #region Enums
+        #region Don't look here
         public enum ScreenNames
         {
             Angel,
@@ -37,10 +37,8 @@ namespace StringBuffer
         BufferController bufferController = new BufferController();
         List<ScreenNames> bufferChanges = new List<ScreenNames> { };
         Dictionary<ScreenNames, BufferChange> screenDictionary = new Dictionary<ScreenNames, BufferChange>() { };
-        //TODO: EVALUATE
-        delegate string RequestScreen(string input);
 
-        int pointIndex = 0;
+        public int pointIndex = 0;
         private ScreenNames[] points = {
                  ScreenNames.Point_1,
                  ScreenNames.Point_2,
@@ -50,9 +48,24 @@ namespace StringBuffer
             };
         public ScreenNames GetNextPointScreen()
         {
+            if (pointIndex > 4)
+            {
+                pointIndex = 0;
+            }
             ScreenNames currentPoint = points[pointIndex];
             pointIndex++;
             return currentPoint;
+        }
+
+        public void ResetPoints()
+        {
+            pointIndex = 0;
+          
+        }
+
+        public void ResetGameScreen()
+        {
+            screensTypes.ResetGameScreen();
         }
 
         private string playerName = "";

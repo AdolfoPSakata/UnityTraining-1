@@ -52,6 +52,16 @@ namespace StringBuffer
             ScreenNames.Message,
         };
 
+        private ScreenNames[] gameScreenOriginal = {
+            ScreenNames.WindowFrame,
+            ScreenNames.Circle,
+            ScreenNames.Angel,
+            ScreenNames.Name,
+            ScreenNames.UsedLetters,
+            ScreenNames.GuessWord,
+            ScreenNames.Message,
+        };
+
         private static Dictionary<ScreenType, ScreenNames[]> screenTypesDict = new Dictionary<ScreenType, ScreenNames[]>()
         {
             {ScreenType.Splash, splashScreen},
@@ -73,6 +83,11 @@ namespace StringBuffer
             }
             newScreen[newScreen.Length - 1] = screenName;
             screenTypesDict[type] = newScreen;
+        }
+
+        public void ResetGameScreen()
+        {
+            screenTypesDict[ScreenType.Game] = (ScreenNames[])gameScreenOriginal.Clone();
         }
 
         public static ScreenNames[] GetScreenConfiguration(ScreenType type)

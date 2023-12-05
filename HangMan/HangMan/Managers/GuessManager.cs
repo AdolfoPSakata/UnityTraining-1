@@ -1,4 +1,5 @@
 ﻿using StringBuffer;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text.RegularExpressions;
@@ -7,32 +8,38 @@ namespace HangMan
 {
     class GuessManager
     {
-        public GuessManager()
-        {
-            Init();
-        }
-
-
         IScreenManager screenManager = new ScreenManager();
-        private string wordToGuess = "";
-        private string usedLetters = "";
+
+        Dictionary<string, string> wordDatabase = new Dictionary<string, string>()
+        {
+            {"1" , ConfigurationManager.AppSettings["Pride"]},
+            {"2", ConfigurationManager.AppSettings["Envy"] },
+            {"3" , ConfigurationManager.AppSettings["Gluttony"] },
+            {"4" , ConfigurationManager.AppSettings["Lust"]},
+            {"5" , ConfigurationManager.AppSettings["Wrath"]},
+            {"6", ConfigurationManager.AppSettings["Greed"]},
+            {"7" , ConfigurationManager.AppSettings["Sloth"]},
+        };
+
+        public string wordToGuess { get; private set; }
+        private string usedLetters;
         private string partialWord;
         private int remainingLetters = 100;
-        //wrong place
         private int remainingLives;
+        private int wrongQualifier = 0;
+
         const int MAX_HEALTH = 5;
         const int MAX_QUALIFIER_TRIES = 3;
-        private int wrongQualifier = 0;
-        readonly string path = ConfigurationManager.AppSettings["WordDatabase"];
-        public void Init()
+        private void Init(string playerInput)
         {
-            wordToGuess = ReadWordFromDatabase();
+            usedLetters = "";
+            wordToGuess = ReadWordFromDatabase(playerInput);
             partialWord = new string('_', wordToGuess.Length);
             remainingLetters = wordToGuess.Length;
             remainingLives = MAX_HEALTH;
         }
 
-        public string ReadWordFromDatabase()
+        private string ReadWordFromDatabase(string path)
         {
             var wordList = FileReader.Instance.ReadExternalFile(path);
             return FileReader.Instance.GetRamdonLine(wordList);
@@ -48,7 +55,6 @@ namespace HangMan
                     if (wrongQualifier < MAX_QUALIFIER_TRIES)
                         return TryGuessAgain(guessLetter);
                     else
-                        //TODO: ADD MESSAGING
                         return WrongGuess();
                 }
             }
@@ -64,7 +70,6 @@ namespace HangMan
                 }
             }
             wrongQualifier = 0;
-            //TODO: change Place
             if (letterIndexes.Count > 0)
                 return RightGuess(guessLetter, letterIndexes);
             else
@@ -81,23 +86,22 @@ namespace HangMan
             return partialWord;
         }
 
-        //TODO: send to tools
-        public string NormalizeString(string stringToNormalize)
+        private string NormalizeString(string stringToNormalize)
         {
             return stringToNormalize.ToUpper();
         }
-        public string WrongGuess()
+        private string WrongGuess()
         {
             remainingLives--;
             screenManager.InsertScreen(ScreensTypes.ScreenType.Game, screenManager.GetNextPoint());
-            //screenManager.SendBufferChanges();
+
             if (remainingLives <= 0)
                 return "DEAD";
 
             return partialWord;
         }
 
-        public string RightGuess(string guessLetter, List<int> letterIndexes)
+        private string RightGuess(string guessLetter, List<int> letterIndexes)
         {
             char[] wordArray = partialWord.ToCharArray();
 
@@ -115,13 +119,12 @@ namespace HangMan
             return partialWord;
         }
 
-        public string TryGuessAgain(string guessLetter)
+        private string TryGuessAgain(string guessLetter)
         {
             //messaging
-            return guessLetter + " Try Again";
+            return guessLetter;
         }
 
-        //tooling
         private string Parse(char charToParse)
         {
             return charToParse.ToString();
@@ -130,6 +133,11 @@ namespace HangMan
         private char Parse(string stringToParse)
         {
             return stringToParse[0];
+        }
+
+        internal void SelectDatabase(string playerInput)
+        {
+            Init(wordDatabase[playerInput]);
         }
     }
 }

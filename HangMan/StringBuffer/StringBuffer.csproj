@@ -25,7 +25,6 @@
     <None Remove="WordDatabase\Lust.txt" />
     <None Remove="WordDatabase\Pride.txt" />
     <None Remove="WordDatabase\Sloth.txt" />
-    <None Remove="WordDatabase\WordDatabaseFile.txt" />
     <None Remove="WordDatabase\wrath.txt" />
   </ItemGroup>
 
@@ -63,9 +62,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="WordDatabase\Wrath.txt">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WordDatabase\WordDatabaseFile.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
