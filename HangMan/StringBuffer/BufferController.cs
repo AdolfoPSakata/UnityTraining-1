@@ -3,49 +3,16 @@ using System.Configuration;
 
 namespace StringBuffer
 {
-    internal class BufferController : IBufferController
+    internal partial class BufferController : IBufferController
     {
-        public enum Mode
-        {
-            Line,
-            Collum,
-            Block,
-        }
 
         private int maxX = int.Parse(ConfigurationManager.AppSettings["MaxChar_X"]);
         private int maxY = int.Parse(ConfigurationManager.AppSettings["MaxChar_Y"]);
 
-        public Tuple<int, int> GetModeSelection(Mode mode, int i, int line, int collum)
+        public Tuple<int, int> GetModeSelection(IWriteMode mode, int i, int line, int collum)
         {
-            int indexX, indexY = 0;
-            switch (mode)
-            {
-                case Mode.Line:
-                    {
-                        indexX = line;
-                        indexY = i + collum;
-                        break;
-                    }
-                case Mode.Collum:
-                    {
-                        indexX = i + line;
-                        indexY = collum;
-                        break;
-                    }
-                case Mode.Block:
-                    {
-                        indexX = line;
-                        indexY = i + collum;
-                        break;
-                    }
-                default:
-                    {
-                        indexX = 0;
-                        indexY = 0;
-                        break;
-                    }
-            }
-            Tuple<int, int> tuple = new Tuple<int, int>(indexX, indexY);
+            mode.UpdateIndexes(line, collum, i);
+            Tuple<int, int> tuple = new Tuple<int, int>(mode.IndexX, mode.IndexY);
             return tuple;
         }
         public string[,] ModifyBuffer(BufferChange change, string[,] buffer)
@@ -69,6 +36,7 @@ namespace StringBuffer
                         break;
                     else if (change.toWrite[i].ToString() == "\r")
                         index++;
+                    //This will calculate the position of each char inside the buffer
                     else
                     {
                         tuple = GetModeSelection(change.mode, i, change.line, change.collum);
@@ -104,12 +72,12 @@ namespace StringBuffer
     }
     internal class BufferChange
     {
-        internal BufferController.Mode mode;
+        internal BufferController.IWriteMode mode;
         internal string toWrite;
         internal int line;
         internal int collum;
 
-        internal BufferChange(BufferController.Mode mode, string toWrite, int line, int collum)
+        internal BufferChange(BufferController.IWriteMode mode, string toWrite, int line, int collum)
         {
             this.mode = mode;
             this.toWrite = toWrite;

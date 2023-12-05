@@ -19,7 +19,14 @@
     <None Remove="ScreensDatabase\Splash.txt" />
     <None Remove="ScreensDatabase\Win.txt" />
     <None Remove="ScreensDatabase\WindowFrame.txt" />
+    <None Remove="WordDatabase\Envy.txt" />
+    <None Remove="WordDatabase\Gluttony.txt" />
+    <None Remove="WordDatabase\Greed.txt" />
+    <None Remove="WordDatabase\Lust.txt" />
+    <None Remove="WordDatabase\Pride.txt" />
+    <None Remove="WordDatabase\Sloth.txt" />
     <None Remove="WordDatabase\WordDatabaseFile.txt" />
+    <None Remove="WordDatabase\wrath.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +44,27 @@
     <EmbeddedResource Include="ScreensDatabase\Lose.txt" />
     <EmbeddedResource Include="ScreensDatabase\Pact.txt" />
     <EmbeddedResource Include="ScreensDatabase\WindowFrame.txt" />
+    <EmbeddedResource Include="WordDatabase\Lust.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Greed.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Pride.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Envy.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Gluttony.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Sloth.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Wrath.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="WordDatabase\WordDatabaseFile.txt">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

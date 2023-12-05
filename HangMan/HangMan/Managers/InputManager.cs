@@ -29,5 +29,9 @@ namespace HangMan
                 return false;
         }
 
+        public void SelectScreenInput(string input)
+        {
+            
+        }
     }
 }

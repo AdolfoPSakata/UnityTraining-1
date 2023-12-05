@@ -23,7 +23,7 @@
 *                                                                                             *
 *                                                                                             *
 *                                                                                             *
-*         [C]  TO SELL IT AGAIN                                                               *
+*         [S]  TO SELL IT AGAIN                                                               *
 *                                                                                             *
 *         [R]  TO RETURN TO MENU                                                              *
 *                                                                                             *

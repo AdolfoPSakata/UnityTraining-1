@@ -5,6 +5,7 @@ namespace StringBuffer
 {
     public class Screens
     {
+        ScreensTypes screensTypes = new ScreensTypes();
         public Screens()
         {
             CreateScreenDictionary();
@@ -67,18 +68,23 @@ namespace StringBuffer
             }
             return bufferChanges;
         }
+        public void InsertScreen(ScreensTypes.ScreenType type, ScreenNames screenName)
+        {
+            screensTypes.InsertScreen(type, screenName);
+        }
 
         public void UpdateDictionary(ScreenNames key, string value)
         {
             screenDictionary[key].toWrite = value;
         }
 
+
         public string[,] ScreenConstructor(ScreensTypes.ScreenType type)
         {
             cachedBuffer = null;
             cachedBuffer = bufferController.CreateBuffer();
 
-            bufferChanges = AddToRenderQueue(ScreensTypes.GetScreenConfiguration(type));
+            AddToRenderQueue(ScreensTypes.GetScreenConfiguration(type));
             foreach (ScreenNames modification in bufferChanges)
             {
                 cachedBuffer = bufferController.ModifyBuffer(screenDictionary[modification], cachedBuffer);
@@ -96,75 +102,75 @@ namespace StringBuffer
         public void CreateScreenDictionary()
         {
             screenDictionary.Add(ScreenNames.Angel, new BufferChange(
-                 BufferController.Mode.Line,
+                 new BufferController.WriteModeLine(),
                  GetTextToWrite(ScreenNames.Angel), 3, 45));
 
             screenDictionary.Add(ScreenNames.Circle, new BufferChange(
-                BufferController.Mode.Block,
+                new BufferController.WriteModeBlock(),
                 GetTextToWrite(ScreenNames.Circle), 4, 5));
 
             screenDictionary.Add(ScreenNames.Intro, new BufferChange(
-                BufferController.Mode.Block,
+                new BufferController.WriteModeBlock(),
                 GetTextToWrite(ScreenNames.Intro), 0, 0));
 
             screenDictionary.Add(ScreenNames.Lose, new BufferChange(
-                BufferController.Mode.Block,
+                new BufferController.WriteModeBlock(),
                 GetTextToWrite(ScreenNames.Lose), 0, 0));
 
             screenDictionary.Add(ScreenNames.Menu, new BufferChange(
-                BufferController.Mode.Block,
+                new BufferController.WriteModeBlock(),
                 GetTextToWrite(ScreenNames.Menu), 0, 0));
 
             screenDictionary.Add(ScreenNames.Pact, new BufferChange(
-               BufferController.Mode.Block,
-               GetTextToWrite(ScreenNames.Pact), 0, 0));
+              new BufferController.WriteModeBlock(),
+              GetTextToWrite(ScreenNames.Pact), 0, 0));
 
             screenDictionary.Add(ScreenNames.Point_1, new BufferChange(
-                    BufferController.Mode.Block,
-                    GetTextToWrite(ScreenNames.Point_1), 16, 18));
+               new BufferController.WriteModeBlock(),
+               GetTextToWrite(ScreenNames.Point_1), 16, 18));
 
             screenDictionary.Add(ScreenNames.Point_2, new BufferChange(
-                    BufferController.Mode.Block,
+                    new BufferController.WriteModeBlock(),
                     GetTextToWrite(ScreenNames.Point_2), 12, 8));
 
             screenDictionary.Add(ScreenNames.Point_3, new BufferChange(
-                    BufferController.Mode.Block,
+                    new BufferController.WriteModeBlock(),
                     GetTextToWrite(ScreenNames.Point_3), 12, 25));
 
             screenDictionary.Add(ScreenNames.Point_4, new BufferChange(
-                BufferController.Mode.Block,
+                new BufferController.WriteModeBlock(),
                 GetTextToWrite(ScreenNames.Point_4), 6, 11));
 
             screenDictionary.Add(ScreenNames.Point_5, new BufferChange(
-                    BufferController.Mode.Block,
+                    new BufferController.WriteModeBlock(),
                     GetTextToWrite(ScreenNames.Point_5), 6, 22));
 
             screenDictionary.Add(ScreenNames.Splash, new BufferChange(
-               BufferController.Mode.Block,
+               new BufferController.WriteModeBlock(),
                GetTextToWrite(ScreenNames.Splash), 0, 0));
 
             screenDictionary.Add(ScreenNames.Win, new BufferChange(
-               BufferController.Mode.Block,
+               new BufferController.WriteModeBlock(),
                GetTextToWrite(ScreenNames.Win), 0, 0));
 
             screenDictionary.Add(ScreenNames.WindowFrame, new BufferChange(
-                   BufferController.Mode.Block,
+                   new BufferController.WriteModeBlock(),
                    GetTextToWrite(ScreenNames.WindowFrame), 0, 0));
 
             screenDictionary.Add(ScreenNames.Name, new BufferChange(
-                   BufferController.Mode.Line,
+                   new BufferController.WriteModeLine(),
                    playerName, 1, 14));
 
             screenDictionary.Add(ScreenNames.GuessWord, new BufferChange(
-                  BufferController.Mode.Line,
+                  new BufferController.WriteModeLine(),
                   guessedLetters, 23, 17));
 
             screenDictionary.Add(ScreenNames.UsedLetters, new BufferChange(
-                  BufferController.Mode.Line,
+                  new BufferController.WriteModeLine(),
                   usedLetters, 28, 25));
 
             screenDictionary.Add(ScreenNames.Message, new BufferChange(
-                  BufferController.Mode.Line,
+                 new BufferController.WriteModeLine(),
                   "HEY, LISTEN!!!!", 4, 52));
         }
     }

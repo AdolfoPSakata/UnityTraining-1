@@ -35,5 +35,15 @@ namespace HangMan
         {
             return screens.GetNextPointScreen();
         }
+
+        public void InsertScreen(ScreensTypes.ScreenType type, Screens.ScreenNames screenName)
+        {
+            screens.InsertScreen(type, screenName);
+        }
+
+        Screens.ScreenNames IScreenManager.GetNextPoint()
+        {
+            return screens.GetNextPointScreen();
+        }
     }
 }

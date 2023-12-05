@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using static StringBuffer.Screens;
 
 namespace StringBuffer
@@ -17,7 +18,7 @@ namespace StringBuffer
         }
 
         private static ScreenNames[] introScreen = {
-                ScreenNames.Intro,
+            ScreenNames.Intro,
         };
 
         private static ScreenNames[] winScreen = {
@@ -61,6 +62,19 @@ namespace StringBuffer
             {ScreenType.Menu, menuScreen},
             {ScreenType.Game, gameScreen},
         };
+
+        public void InsertScreen(ScreenType type, ScreenNames screenName)
+        {
+            ScreenNames[] newScreen = new ScreenNames[screenTypesDict[type].Length+ 1];
+
+            for (int i = 0; i < screenTypesDict[type].Length; i++)
+            {
+                newScreen[i] = screenTypesDict[type][i];
+            }
+            newScreen[newScreen.Length - 1] = screenName;
+            screenTypesDict[type] = newScreen;
+        }
+
         public static ScreenNames[] GetScreenConfiguration(ScreenType type)
         {
             return screenTypesDict[type];

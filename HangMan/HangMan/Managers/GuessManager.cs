@@ -11,6 +11,8 @@ namespace HangMan
         {
             Init();
         }
+
+
         IScreenManager screenManager = new ScreenManager();
         private string wordToGuess = "";
         private string usedLetters = "";
@@ -43,16 +45,13 @@ namespace HangMan
                 if (Regex.IsMatch(NormalizeString(guessLetter), NormalizeString(Parse(letter))))
                 {
                     wrongQualifier++;
-                    //TODO: Migrate to appconfig
                     if (wrongQualifier < MAX_QUALIFIER_TRIES)
                         return TryGuessAgain(guessLetter);
                     else
                         //TODO: ADD MESSAGING
                         return WrongGuess();
-                    //return;
                 }
             }
-            //end condition
             usedLetters += guessLetter;
             List<int> letterIndexes = new List<int>();
             letterIndexes.Clear();
@@ -90,7 +89,8 @@ namespace HangMan
         public string WrongGuess()
         {
             remainingLives--;
-            screenManager.SendBufferChanges(screenManager.GetNextPoint());
+            screenManager.InsertScreen(ScreensTypes.ScreenType.Game, screenManager.GetNextPoint());
+            //screenManager.SendBufferChanges();
             if (remainingLives <= 0)
                 return "DEAD";
 
