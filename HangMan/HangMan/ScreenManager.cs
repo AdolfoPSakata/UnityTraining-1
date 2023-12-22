@@ -1,40 +1,35 @@
-﻿using System;
-//using System.Configuration;
-using StringBuffer;
+﻿using StringBuffer;
+using System;
 
-namespace UnityTraining_1
+namespace HangMan
 {
-    class ScreenManager
-    { 
-    //    int maxX = int.Parse(ConfigurationManager.AppSettings["MaxChar_X"]);
-    //    int maxY = int.Parse(ConfigurationManager.AppSettings["MaxChar_Y"]);
-        string cachedName = null;
-        string[,] cachedBuffer = { };
-        Screens screens = new Screens();
-        //Screens screens = new Screens.Screens();
-        //public ScreenManager()
-        //{
-
-        //}
-
-        
-
-       public void ShowScreen()
+    class ScreenManager : IScreenManager
+    {
+        public ScreenManager()
         {
-            cachedBuffer = screens.test();
-            foreach (var item in cachedBuffer)
+            screens.CreateScreenDictionary();
+        }
+
+        Screens screens = new Screens();
+
+        public void ShowScreen(string data)
+        {
+            //TODO: switch or state machine
+            string[,] test = { };
+            test = screens.ScreenConstructor();
+            Console.Clear();
+            foreach (var item in test)
             {
-                Console.Clear();
+
+                if (item == " ")
+                    Console.BackgroundColor = ConsoleColor.Black;
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
+                }
                 Console.Write(item);
             }
         }
-
-        public string ShowName()
-        {
-            string playersName = Console.ReadLine();
-            return playersName;
-        }
-
-       
     }
 }

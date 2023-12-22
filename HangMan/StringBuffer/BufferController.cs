@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 
 namespace StringBuffer
 {
@@ -10,8 +9,6 @@ namespace StringBuffer
             Line,
             Collum,
             Block,
-            Single,
-            Missing,
         }
 
         internal Tuple<int, int> ModeSelection(Mode mode, int i, int line, int collum)
@@ -34,7 +31,7 @@ namespace StringBuffer
                 case Mode.Block:
                     {
                         indexX = line;
-                        indexY = collum;
+                        indexY = i + collum;
                         break;
                     }
                 default:
@@ -55,32 +52,50 @@ namespace StringBuffer
             {
                 finalString += singleChar;
             }
+            
             return finalString;
         }
 
-        internal void ModifyBuffer(Mode mode, string[,] buffer, string toWrite, int line, int collum, int repeat)
+        public string[,] ModifyBuffer(BufferChange change, string[,] buffer)
         {
             Tuple<int, int> tuple = new Tuple<int, int>(0, 0);
-            for (int j = 0; j < repeat; j++)
+            int j = 0;
+            int index = 0;
+            do
             {
-                for (int i = 0; i < toWrite.Length; i++)
+                for (int i = 0; i <= change.toWrite.Length; i++)
                 {
-                    tuple = ModeSelection(mode, i, line, collum);
-                    buffer[tuple.Item1 + j, tuple.Item2 + j] = toWrite[i + j].ToString();
+                    if (change.toWrite[i].ToString() == "\n")
+                    {
+                        j++;
+                        index++;
+                        break;
+                    }
+                    else if (change.toWrite[i].ToString() == "\r")
+                    {
+                        index++;
+                    }
+                    else
+                    {
+                        tuple = ModeSelection(change.mode, i, change.line, change.collum);
+                        if (string.IsNullOrWhiteSpace(buffer[tuple.Item1 + j, tuple.Item2]))
+                            buffer[tuple.Item1 + j, tuple.Item2] = change.toWrite[index].ToString();
+                        index++;
+                       
+                    }
                 }
-            }
-        } 
+            } while (change.toWrite.Length > index);
+            return buffer;
+        }
 
-        internal string[,] SetBuffer()
+        public string[,] SetBuffer(int line, int collum)
         {
-            int maxX = int.Parse(ConfigurationManager.AppSettings["MaxChar_X"]);
-            int maxY = int.Parse(ConfigurationManager.AppSettings["MaxChar_Y"]);
-            string[,] buffer = new string[maxX, maxY];
+            string[,] buffer = new string[line, collum];
 
-            for (int x = 0; x < maxX; x++)
+            for (int x = 0; x < line; x++)
             {
                 int lastIndex = 0;
-                for (int y = 0; y < maxY; y++)
+                for (int y = 0; y < collum; y++)
                 {
                     buffer[x, y] = " ";
                     lastIndex = y;
@@ -88,6 +103,24 @@ namespace StringBuffer
                 buffer[x, lastIndex] = "\n";
             }
             return buffer;
+        }
+    }
+
+    internal class BufferChange
+    {
+
+
+        public BufferController.Mode mode;
+        public string toWrite;
+        public int line;
+        public int collum;
+
+        public BufferChange(BufferController.Mode mode, string toWrite, int line, int collum)
+        {
+            this.mode = mode;
+            this.toWrite = toWrite;
+            this.line = line;
+            this.collum = collum;
         }
     }
 }

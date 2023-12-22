@@ -8,11 +8,5 @@
   <ItemGroup>
     <ProjectReference Include="..\StringBuffer\StringBuffer.csproj" />
   </ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="WordDatabase\WordDatabaseFile.txt">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</EmbeddedResource>
-	</ItemGroup>
 	
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace UnityTraining_1
+namespace HangMan
 {
     class Program
     {
@@ -12,30 +12,32 @@ namespace UnityTraining_1
             bool isPlaying = false;
             string databasePath = ConfigurationManager.AppSettings["WordDatabase"];
 
-            WordManager wordManager = new WordManager(databasePath);
+            //WordReader wordManager = new WordReader(databasePath);
             InputManager inputManager = new InputManager();
-            ScreenManager screenManager = new ScreenManager();
+            IScreenManager screenManager = new ScreenManager();
             GuessManager guessManager = new GuessManager();
+
+
             //string name = Console.ReadLine();
-            //screenManager.ShowScreen();
             isPlaying = true;
-            screenManager.ShowScreen();
-            Console.ReadLine();
-            //while (true)
-            //{
-                
-            //    //string input = Console.ReadLine();
-            //    //handler
-            //    //arrumar
-            //    //Console.WriteLine(inputManager.ReadInput(input));
+            screenManager.ShowScreen("tetetetet");
 
-            //}
-            //while (isPlaying)
-            //{
-            //    string currentWord = wordManager.GetRandomWord();
-            //    Console.WriteLine(name + "/n ------------working----------------- " + currentWord );
+            while (isPlaying)
+            {
+                string playerInput = inputManager.ReadInput(Console.ReadLine());
+                Console.WriteLine(guessManager.usedLetters);
+                Console.WriteLine(guessManager.wordToGuess);
+                if (!string.IsNullOrEmpty(playerInput))
+                {
+                    guessManager.VerifyGuess(playerInput);
 
-            //}
+
+                }
+
+
+
+            }
+            Console.WriteLine("-------------END---------------");
         }
     }
 }

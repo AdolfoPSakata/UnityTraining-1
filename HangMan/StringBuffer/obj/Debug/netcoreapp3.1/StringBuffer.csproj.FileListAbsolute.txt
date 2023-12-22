@@ -8,3 +8,4 @@ C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\StringBuffer\bin\Debug\netc
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\StringBuffer\bin\Debug\netcoreapp3.1\StringBuffer.pdb
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\StringBuffer\obj\Debug\netcoreapp3.1\StringBuffer.dll
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\StringBuffer\obj\Debug\netcoreapp3.1\StringBuffer.pdb
+C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\StringBuffer\bin\Debug\netcoreapp3.1\WordDatabase\WordDatabaseFile.txt
