@@ -5,6 +5,12 @@ namespace HangMan
     class InputManager
     {
         const string pattern = "^[a-zA-Z]{1}.*";
+
+        public void Init()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public string ReadInput(string input)
         {
             if (ValidateInput(input))

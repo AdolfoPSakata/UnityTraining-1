@@ -18,4 +18,3 @@ C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreap
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.dll
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.pdb
 C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\obj\Debug\netcoreapp3.1\HangMan.genruntimeconfig.cache
-C:\Users\adolfo.sakata\UnityTraining\HangMan\HangMan\HangMan\bin\Debug\netcoreapp3.1\WordDatabase\WordDatabaseFile.txt

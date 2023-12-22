@@ -1,34 +1,68 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Screens\Circle.txt" />
-    <None Remove="Screens\Point_1.txt" />
-    <None Remove="Screens\Point_2.txt" />
-    <None Remove="Screens\Point_3.txt" />
-    <None Remove="Screens\Point_4.txt" />
-    <None Remove="Screens\Point_5.txt" />
-    <None Remove="Screens\ScreensASCII - Copy (5) - Copy.txt" />
-    <None Remove="Screens\ScreensASCII - Copy (5).txt" />
-    <None Remove="Screens\WindowFrame.txt" />
-    <None Remove="WordDatabase\WordDatabaseFile.txt" />
+    <None Remove="ScreensDatabase\Angel.txt" />
+    <None Remove="ScreensDatabase\Circle.txt" />
+    <None Remove="ScreensDatabase\Intro.txt" />
+    <None Remove="ScreensDatabase\Lose.txt" />
+    <None Remove="ScreensDatabase\Menu.txt" />
+    <None Remove="ScreensDatabase\Pact.txt" />
+    <None Remove="ScreensDatabase\Point_1.txt" />
+    <None Remove="ScreensDatabase\Point_2.txt" />
+    <None Remove="ScreensDatabase\Point_3.txt" />
+    <None Remove="ScreensDatabase\Point_4.txt" />
+    <None Remove="ScreensDatabase\Point_5.txt" />
+    <None Remove="ScreensDatabase\Splash.txt" />
+    <None Remove="ScreensDatabase\Win.txt" />
+    <None Remove="ScreensDatabase\WindowFrame.txt" />
+    <None Remove="WordDatabase\Envy.txt" />
+    <None Remove="WordDatabase\Gluttony.txt" />
+    <None Remove="WordDatabase\Greed.txt" />
+    <None Remove="WordDatabase\Lust.txt" />
+    <None Remove="WordDatabase\Pride.txt" />
+    <None Remove="WordDatabase\Sloth.txt" />
+    <None Remove="WordDatabase\wrath.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Screens\Point_1.txt" />
-    <EmbeddedResource Include="Screens\Point_2.txt" />
-    <EmbeddedResource Include="Screens\Point_3.txt" />
-    <EmbeddedResource Include="Screens\Point_4.txt" />
-    <EmbeddedResource Include="Screens\Point_5.txt" />
-    <EmbeddedResource Include="Screens\ScreensASCII - Copy (5) - Copy.txt" />
-    <EmbeddedResource Include="Screens\ScreensASCII - Copy (5).txt" />
-    <EmbeddedResource Include="Screens\Circle.txt" />
-    <EmbeddedResource Include="Screens\WindowFrame.txt" />
-    <EmbeddedResource Include="WordDatabase\WordDatabaseFile.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <EmbeddedResource Include="ScreensDatabase\Win.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Splash.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Menu.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Point_1.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Point_2.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Point_3.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Point_4.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Point_5.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Angel.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Circle.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Intro.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Lose.txt" />
+    <EmbeddedResource Include="ScreensDatabase\Pact.txt" />
+    <EmbeddedResource Include="ScreensDatabase\WindowFrame.txt" />
+    <EmbeddedResource Include="WordDatabase\Lust.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Greed.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Pride.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Envy.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Gluttony.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Sloth.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordDatabase\Wrath.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 

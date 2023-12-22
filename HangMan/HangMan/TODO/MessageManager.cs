@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HangMan
+namespace HangMan.Managers
 {
-    interface IScreenManager
+    class MessageManager
     {
-        void ShowScreen(string data);
+
     }
 }
