@@ -18,6 +18,7 @@ namespace HangMan
             Thread.Sleep(3000);
             StartGame(screenManager, screenInput);
         }
+
         static void StartGame(IScreenManager screenManager, ScreenInput screenInput)
         {
             ScreensTypes.ScreenType currentScreen = ScreensTypes.ScreenType.Menu;
